@@ -4,11 +4,11 @@ import {Students} from "../imports/api/students.js";
 
 Meteor.startup(() => {
   // code to run on server at startup
-  if(Students.find().count()===0)
+  if(Meteor.isServer && Students.find().count()===0)
   {
   	// let data = JSON.parse(studentsData);
   	// console.log(Students.find().count());
-  	Students.insert(studentsData);
+  	studentsData.forEach((s)=>Students.insert(s));
   	console.log(Students.find().fetch());
   }
 });

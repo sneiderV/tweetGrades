@@ -1,7 +1,11 @@
 
 import React, { Component } from 'react';
+import { Students } from "../api/students.js";
 
-export default class App extends Component{
+import { withTracker } from "meteor/react-meteor-data";
+
+
+class App extends Component{
 
 	render(){
 		return(
@@ -36,8 +40,15 @@ export default class App extends Component{
 				</div>
 				<h5>WebDev ~ Uniandes</h5>
 				<input type="number" name="code" placeholder="Enter your code"/>
-				<div id="visualitationDiv">
-					
+				<div className="container">
+					<div id="visualitationDiv" className="row">
+						{this.props.students.map(
+							(student)=>{
+								return (<div className="col">
+									{student.twitteruser}
+								</div>);
+							})}
+					</div>
 				</div>
 			</center>
 		</div>
@@ -45,3 +56,13 @@ export default class App extends Component{
 	}
 
 }
+
+export default withTracker(()=>{
+	//Se suscribe a la publicación de students
+	Meteor.subscribe("students");
+
+	return {
+		students: Students.find({}, {sort: {createdAt: -1}}).fetch(),
+	};
+
+})(App);
