@@ -1,9 +1,20 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import React from "react";
+import { Meteor } from "meteor/meteor";
+import { render } from "react-dom";
+//import { Template } from 'meteor/templating';
+//import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
+import App from "../imports/ui/App.js"
 
-Template.hello.onCreated(function helloOnCreated() {
+
+Meteor.startup(()=>{
+	{
+		render(<App />,document.getElementById("react-root"));	
+	}
+});
+
+/*Template.hello.onCreated(function helloOnCreated() {
   // counter starts at 0
   this.counter = new ReactiveVar(0);
 });
@@ -19,4 +30,4 @@ Template.hello.events({
     // increment the counter when button is clicked
     instance.counter.set(instance.counter.get() + 1);
   },
-});
+});*/
