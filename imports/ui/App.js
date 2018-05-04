@@ -103,7 +103,7 @@ class App extends Component{
 		.attr("x", 0)
 		.attr("dy", "0.71em")
 		.attr("fill", "#000")
-		.text("Calification");
+		.text("Grade");
 
 		var student = g.selectAll(".student")
 		.data(students)
