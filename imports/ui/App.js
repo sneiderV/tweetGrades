@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import { Students } from "../api/students.js";
-
+import "./css/app.css"
 import { withTracker } from "meteor/react-meteor-data";
 import * as d3 from "d3";
 
@@ -131,8 +131,8 @@ render(){
 	return(
 
 		//div inicial
-		<div >
-		<nav className="navbar navbar-expand-lg navbar-light bg-light">
+		<div className="proof">
+		<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
 		<a className="navbar-brand" href="#">TweetGrades</a>
 		<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
 		<span className="navbar-toggler-icon"></span>
@@ -154,11 +154,16 @@ render(){
 		</nav>
 
 		<center>
-		<div>
-		<h1>TweetGrades</h1>
+		<div >
+		<h1 className="whiteT">TweetGrades</h1>
+		<h5 className="whiteT">WebDev ~ Uniandes</h5>
+		<div className="row">
+		<div className="col-4"></div>
+		<div className="col-4">
+		<input type="number" name="code" width="10" className="form-control" placeholder="Enter your code"/>
 		</div>
-		<h5>WebDev ~ Uniandes</h5>
-		<input type="number" name="code" placeholder="Enter your code"/>
+		<div className="col-4"></div>
+		</div>
 		<div className="container">
 		<div id="visualitationDiv" className="row">
 		{this.props.students.map(
@@ -169,15 +174,20 @@ render(){
 			})}
 		</div>
 		</div>
-		<svg 
+		<div className="row">
+		<div className="col-1"></div>
+		<svg className="col card"
 		id ="svg"
 		width="1280" 
 		height="500" 
 		// ref = {(svg)=>this.svg=svg}
 		ref = {this.svg}
 		></svg>
-
+		<div className="col-1"></div>
+		</div>	
+		</div>
 		</center>
+		<br/><br/><br/><br/><br/><br/>
 		</div>
 		);
 }
