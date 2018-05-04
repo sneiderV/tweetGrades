@@ -1,1 +1,11 @@
 /* CSS declarations go here */
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.line:hover {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 8.5px;
+}
