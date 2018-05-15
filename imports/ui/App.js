@@ -13,7 +13,16 @@ class App extends Component{
 		
 	}
 
+	darTweets(){
+		Meteor.call('darTweets',(err,res) => {
+            if(err) throw err;
+            console.log(">> datos de los Tweets: ");
+            console.log(res);
+        }); 
+	}
+
 	componentDidMount(){
+		
 		var students = [
 {"nombre":"NICOLAS ACEVEDO SANDOVAL","seccion":1,"codigo":201530726,"twitteruser":"n_acevedo11","notas":[2,1,2,-1,2,2,0,2,2,-1,2,2,2,2,2,2,-1,-1,-1,-1,-1,-1,-1],"idtweets":[]},
 {"nombre":"GERMAN CAMILO ANDRADE MAYORGA","seccion":1,"codigo":201511422,"twitteruser":"gcandrade10","notas":[0,2,2,2,2,2,2,2,2,-1,2,1,1,1,2,2,-1,-1,-1,-1,-1,-1,-1],"idtweets":[]},
@@ -127,14 +136,6 @@ class App extends Component{
 		// .text(function(d) { return d.id; });
 	}
 
-	darTweets(){
-		Meteor.call('darTweets',(err,res) => {
-            if(err) throw err;
-            console.log(">> datos de los Tweets: ");
-            console.log(res);
-        }); 
-	}
-
 render(){
 	return(
 
@@ -177,7 +178,7 @@ render(){
 		<div id="visualitationDiv" className="row">
 		{this.props.students.map(
 			(student)=>{
-				return (<div className="col">
+				return (<div className="col" key={student.twitteruser}>
 					{student.twitteruser}
 					</div>);
 			})}
