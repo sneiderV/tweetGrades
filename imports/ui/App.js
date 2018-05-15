@@ -63,22 +63,22 @@ class App extends Component{
 		z = d3.scaleOrdinal(d3.schemeCategory10);
 
 		var line = d3.line()
-    //.curve(d3.curveBasis)
-    .x(function(d, index) { return x(index); })
-    .y(function(d) { return y(d); });
+	//.curve(d3.curveBasis)
+	.x(function(d, index) { return x(index); })
+	.y(function(d) { return y(d); });
 
 
-    x.domain([
-    	d3.min(students, function(c) { return d3.min(c.notas); }),
-    	d3.max(students, function(c) { return d3.max(c.notas, function(d, index) { return index; }); })
-    	]);
+	x.domain([
+		d3.min(students, function(c) { return d3.min(c.notas); }),
+		d3.max(students, function(c) { return d3.max(c.notas, function(d, index) { return index; }); })
+		]);
 
-    y.domain([
-    	d3.min(students, function(c) { return d3.min(c.notas); }),
-    	d3.max(students, function(c) { return d3.max(c.notas, function(d) { return d; }); })
-    	]);
+	y.domain([
+		d3.min(students, function(c) { return d3.min(c.notas); }),
+		d3.max(students, function(c) { return d3.max(c.notas, function(d) { return d; }); })
+		]);
 
-    z.domain(students.map(function(c) { return c.id; }));
+	z.domain(students.map(function(c) { return c.id; }));
 
 		//atributos en el eje X  
 		g.append("g")
@@ -127,6 +127,14 @@ class App extends Component{
 		// .text(function(d) { return d.id; });
 	}
 
+	darTweets(){
+		Meteor.call('darTweets',(err,res) => {
+            if(err) throw err;
+            console.log(">> datos de los Tweets: ");
+            console.log(res);
+        }); 
+	}
+
 render(){
 	return(
 
@@ -157,6 +165,7 @@ render(){
 		<div >
 		<h1 className="whiteT">TweetGrades</h1>
 		<h5 className="whiteT">WebDev ~ Uniandes</h5>
+		<button type="button" onClick={this.darTweets()}>Tweets!</button>
 		<div className="row">
 		<div className="col-4"></div>
 		<div className="col-4">
