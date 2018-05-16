@@ -1,15 +1,19 @@
 import { Meteor } from 'meteor/meteor';
 import {Students} from "../imports/api/students.js";
+import * as d3 from "d3";
 
 
 Meteor.startup(() => {
   // code to run on server at startup
   if(Meteor.isServer && Students.find().count()===0)
   {
-  	// let data = JSON.parse(studentsData);
-  	// console.log(Students.find().count());
-  	studentsData.forEach((s)=>Students.insert(s));
-  	console.log(Students.find().fetch());
+  	// let data = d3.json("../imports/api/studentsData.json",function(data){
+  		// let studentsData = data;
+  		console.log(Students.find().count());
+	  	studentsData.forEach((s)=>Students.insert(s));
+	  	console.log(Students.find().fetch());
+  	// });
+  	
   }
 });
 
