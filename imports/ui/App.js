@@ -214,7 +214,11 @@ render(){
 		<LineChart update={this.state.update} students={this.props.students}/>
 		<div className="col-1"></div>
 		</div>	
-		
+
+		<blockquote class="twitter-tweet">
+			<a href="https://twitter.com/SneiderVG/status/993350996242911233" data-datetime="2012-12-03T18:51:11+00:00">December 3, 2012</a>
+		</blockquote>
+
 		</div>
 		</center>
 		<br/><br/><br/><br/>
