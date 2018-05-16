@@ -18,7 +18,7 @@ export default class AccountsUI extends Component {
     return (
       <div className="headerlogin">
       <center>
-        <p>Your are Teaching Assistant? <span ref="container"/> </p>
+        <p>Are you a Teaching Assistant? <span ref="container"/> </p>
       </center>
       </div>
       );
