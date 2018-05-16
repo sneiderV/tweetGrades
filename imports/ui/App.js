@@ -15,9 +15,14 @@ class App extends Component{
 		// this.componentDidMount = this.componentDidMount.bind(this);
 
 		this.darTweets = this.darTweets.bind(this);
-		
+		this.getTweetsStudent = this.getTweetsStudent.bind(this);
+		this.getScreenName = this.getScreenName.bind(this);
+		this.state={
+			currentCode : 0,
+		};
 	}
 
+	//devuelve todos los tweets de la clase, es decir, los que tienen #WebDev @Uniandes
 	darTweets(){
 		Meteor.call('darTweets',(err,res) => {
             if(err) throw err;
@@ -25,6 +30,32 @@ class App extends Component{
             console.log(res);
         }); 
 	}
+
+	//devuelve los ultimos 30 tweets de un usuario por SCREEN_NAME i.e. @SneiderVG
+	//nota: no se requiere el simbolo '@'
+	getTweetsStudent(){
+		Meteor.call('darTweetsStudent',(err,res) => {
+            if(err) throw err;
+            console.log(">> datos de los Tweets: ");
+            console.log(res);
+        }); 
+	}
+
+	//busca el screen_name de un estudiante dado el codigo
+	getScreenName(){
+		var cod = 201215364;
+		var snp = "no hay estudiante con ese codigo"; 
+		if(this.props.students.length>0){
+			this.props.students.map((s)=>
+				{
+					if(s.codigo == cod){
+						 snp = s.twitteruser;
+					}
+				});
+			console.log(snp);
+		}
+		else{console.log("no hay estudiantes en el props");}
+	} 
 
 dibujarNotas(){
 	
@@ -143,8 +174,6 @@ cargarCalificador(){
     }); 
   }
 
-// <button type="button" onClick={this.darTweets}>Tweets!</button>
-
 // <div className="container">
 // 		<div id="visualitationDiv" className="row">
 // 		{this.props.students.map(
@@ -168,7 +197,7 @@ render(){
 		<div >
 		<h1 className="whiteT">TweetGrades</h1>
 		<h5 className="whiteT">WebDev ~ Uniandes</h5>
-		
+		<button type="button" onClick={this.getScreenName}>Tweets!</button>
 		<div className="row">
 		<div className="col"></div>
 		<div className="col-2">
@@ -181,12 +210,12 @@ render(){
 			<div className="col"></div>
 			<div className="col-auto">
 				<h6>Course average</h6>
-				<input type="text" value="64" class="dialPromedio"/>
+				<input type="text" defaultValue="64" className="dialPromedio"/>
 			</div>
 			<div className="col-1"></div>
 			<div className="col-auto">
 				<h6>Your average</h6>
-				<input type="text" value="75" class="dialEstudiante"/>
+				<input type="text" defaultValue="75" className="dialEstudiante"/>
 			</div>
 			<div className="col"></div>
 		</div>
