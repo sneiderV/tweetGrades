@@ -30,6 +30,24 @@ if (Meteor.isServer) {
 	      return getTweets('search/tweets', { q: '#WebDev @Uniandes', count: 100 });
     	} 
     	catch (error) { throw new Meteor.Error(error.name, error.message);}
+  	},
+
+  	'darTweetsStudent'(screenname){
+  		var Twit = require('twit');
+
+	    var T = new Twit({
+	        consumer_key:         'GTi2PxIHdvA8OjneUlZKf7XXx', // API key
+	        consumer_secret:      'qC0fVvdNiQ8P18Qxe3G176gZ5M7ERykq0FwSVPvpMBB5wTtDUb', // API secret
+	        access_token:         '889371522648993792-vnmSDq4hyVQDY4aMUGkEzrO4fKOXOLB', 
+	        access_token_secret:  'ILhpnYZ85aJjNeJ3a8N2DFo8Beo42QqYNnmUHqCgMfSS9'
+	    });
+
+	    const getTweets = Meteor.wrapAsync(T.get, T);
+	    //  search twitter for all tweets containing the word '#WebDev @Uniandes' /// since:2011-11-11
+	    try {
+	      return getTweets('statuses/user_timeline', { screen_name: 'SneiderVG', count: 10 });
+    	} 
+    	catch (error) { throw new Meteor.Error(error.name, error.message);}
   	}
 
   }); // final of Meteor Methods
