@@ -1,6 +1,7 @@
 /* CSS declarations go here */
 .whiteT{
-	color: white;
+	/*color: white;*/
+	color: #137ed9;
 }
 .line {
   fill: none;
@@ -13,9 +14,14 @@
   stroke-width: 8.5px;
 }
 .proof{
-	background-image: url(https://pre00.deviantart.net/6f68/th/pre/f/2012/274/3/a/twitter_minimalistic_background_by_vaughnwhiskey-d5gityo.png);
+	/*background-image: url(https://pre00.deviantart.net/6f68/th/pre/f/2012/274/3/a/twitter_minimalistic_background_by_vaughnwhiskey-d5gityo.png);*/
 	background-attachment: fixed; 
 	background-repeat: no-repeat; 
 	background-position: center;
 	background-size: 100% 100%;
+}
+.headerlogin{
+	background-color: #00d7ff;
+	color: #137ed9;
+	font-weight: bold;
 }

@@ -4,7 +4,8 @@ import { Students } from "../api/students.js";
 import "./css/app.css"
 import { withTracker } from "meteor/react-meteor-data";
 import * as d3 from "d3";
-
+import knob from 'jquery-knob';
+import $ from 'jquery';
 import AccountsUI from "./AccountsUI.js";
 
 class App extends Component{
@@ -118,6 +119,42 @@ cargarCalificador(){
 	FlowRouter.go("/calificador");
 }
 
+ componentDidMount() {
+    $(".dialPromedio").knob({
+    	'width':150,
+    	'heigth':100,
+    	'fgColor':'#66CC66',
+    	'min':0,
+    	'max':100,
+    	'readOnly':true,
+    	'angleOffset': -125,
+		'angleArc':250,
+	}); 
+
+    $(".dialEstudiante").knob({
+    	'width':150,
+    	'heigth':100,
+  		'fgColor':'#ff0000',
+  		'min':0,
+    	'max':100,
+    	'readOnly':true,
+    	'angleOffset': -125,
+		'angleArc':250,
+    }); 
+  }
+
+// <button type="button" onClick={this.darTweets}>Tweets!</button>
+
+// <div className="container">
+// 		<div id="visualitationDiv" className="row">
+// 		{this.props.students.map(
+// 			(student)=>{
+// 				return (<div className="col" key={student.twitteruser}>
+// 					{student.twitteruser}
+// 					</div>);
+// 			})}
+// 		</div>
+// 		</div>
 render(){
 	if(this.props.currentUser && this.props.currentUser.username==="mini-dictador")
 		this.cargarCalificador();
@@ -127,30 +164,34 @@ render(){
 
 		//div inicial
 		<div className="proof">
-		
-
 		<center>
 		<div >
 		<h1 className="whiteT">TweetGrades</h1>
 		<h5 className="whiteT">WebDev ~ Uniandes</h5>
-		<button type="button" onClick={this.darTweets}>Tweets!</button>
+		
 		<div className="row">
-		<div className="col-4"></div>
-		<div className="col-4">
+		<div className="col"></div>
+		<div className="col-2">
 		<input type="number" name="code" width="10" className="form-control" placeholder="Enter your code"/>
 		</div>
-		<div className="col-4"></div>
+		<div className="col"></div>
 		</div>
-		<div className="container">
-		<div id="visualitationDiv" className="row">
-		{this.props.students.map(
-			(student)=>{
-				return (<div className="col" key={student.twitteruser}>
-					{student.twitteruser}
-					</div>);
-			})}
+		<br/>
+		<div className="row">
+			<div className="col"></div>
+			<div className="col-auto">
+				<h6>Course average</h6>
+				<input type="text" value="64" class="dialPromedio"/>
+			</div>
+			<div className="col-1"></div>
+			<div className="col-auto">
+				<h6>Your average</h6>
+				<input type="text" value="75" class="dialEstudiante"/>
+			</div>
+			<div className="col"></div>
 		</div>
-		</div>
+
+		
 		<div className="row">
 		<div className="col-1"></div>
 		<svg className="col card"
@@ -161,9 +202,10 @@ render(){
 		></svg>
 		<div className="col-1"></div>
 		</div>	
+		
 		</div>
 		</center>
-		<br/><br/><br/><br/><br/><br/>
+		<br/><br/><br/><br/>
 		</div>
 		);
 }
