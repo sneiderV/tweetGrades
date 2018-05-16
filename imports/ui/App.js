@@ -7,6 +7,7 @@ import * as d3 from "d3";
 import knob from 'jquery-knob';
 import $ from 'jquery';
 import AccountsUI from "./AccountsUI.js";
+import ReactDOM from 'react-dom';
 
 class App extends Component{
 	constructor(props){
@@ -19,6 +20,7 @@ class App extends Component{
 		this.getScreenName = this.getScreenName.bind(this);
 		this.state={
 			currentCode : 0,
+			currentScreenName : "sin usuario",
 		};
 	}
 
@@ -33,8 +35,8 @@ class App extends Component{
 
 	//devuelve los ultimos 30 tweets de un usuario por SCREEN_NAME i.e. @SneiderVG
 	//nota: no se requiere el simbolo '@'
-	getTweetsStudent(){
-		Meteor.call('darTweetsStudent',(err,res) => {
+	getTweetsStudent(screenname){
+		Meteor.call('darTweetsStudent',screenname,(err,res) => {
             if(err) throw err;
             console.log(">> datos de los Tweets: ");
             console.log(res);
@@ -42,20 +44,35 @@ class App extends Component{
 	}
 
 	//busca el screen_name de un estudiante dado el codigo
-	getScreenName(){
-		var cod = 201215364;
+	getScreenName(code){
 		var snp = "no hay estudiante con ese codigo"; 
 		if(this.props.students.length>0){
 			this.props.students.map((s)=>
 				{
-					if(s.codigo == cod){
+					if(s.codigo == code){
 						 snp = s.twitteruser;
 					}
 				});
-			console.log(snp);
+			//console.log(snp);
+			return snp; 
 		}
 		else{console.log("no hay estudiantes en el props");}
 	} 
+
+	//manejo los eventos del input del search by CODE
+	handleSearch(event) {
+		event.preventDefault();
+		const code = ReactDOM.findDOMNode(this.refs.code).value;
+	    var screenname = this.getScreenName(code);
+		
+		this.setState({ 
+      		currentCode: code,
+      		currentScreenName : screenname,
+      	});
+
+      	console.log(">>>Tweets del estudiante: "+screenname+ " con codigo: "+code);
+      	this.getTweetsStudent(screenname);
+	}
 
 dibujarNotas(){
 	
@@ -201,7 +218,9 @@ render(){
 		<div className="row">
 		<div className="col"></div>
 		<div className="col-2">
-		<input type="number" name="code" width="10" className="form-control" placeholder="Enter your code"/>
+			<form onSubmit={this.handleSearch.bind(this)} >
+				<input type="number" className="form-control" ref="code" placeholder="Enter your code and press Enter!"/>
+			</form>	
 		</div>
 		<div className="col"></div>
 		</div>
