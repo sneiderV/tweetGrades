@@ -21,6 +21,8 @@ class App extends Component{
 		this.state={
 			currentCode : 0,
 			currentScreenName : "sin usuario",
+			currentAverageStudent : 0,
+			currentAverageCourse: 0,
 		};
 	}
 
@@ -59,6 +61,41 @@ class App extends Component{
 		else{console.log("no hay estudiantes en el props");}
 	} 
 
+	//se obtiene los puntos de un estudiante y se modifica el dialEstudiante con estos puntos obtenidos.
+	getPointsStudent(code){ 
+		if(this.props.students.length>0){
+			this.props.students.map((s)=>
+				{
+					if(s.codigo == code){
+						 console.log(s.notas);
+						 var sum = s.notas.reduce((a, b)=>{ return a + b; });
+						 console.log(">>>suma"+sum);
+						 $('.dialEstudiante').val(sum).trigger('change');
+					}
+				});
+		}
+		else{console.log("no hay estudiantes en el props");}
+	}
+
+	//se obtienen los puntos promedios de los estudiantes y se muestra en el DialAverageCourse
+	getAveragePointsCourse(){
+		var totalP = 0; 
+
+		if(this.props.students.length>0){
+			this.props.students.map((s)=>
+				{
+					totalP += s.notas.reduce((a, b)=>{ return a + b; });
+				});
+		}
+		else{console.log("no hay estudiantes en el props");}
+
+		if(totalP>0){
+			var prom = totalP/this.props.students.length;
+			$('.dialPromedio').val(prom).trigger('change');
+			console.log(prom);
+		}
+	}
+
 	//manejo los eventos del input del search by CODE
 	handleSearch(event) {
 		event.preventDefault();
@@ -72,6 +109,8 @@ class App extends Component{
 
       	console.log(">>>Tweets del estudiante: "+screenname+ " con codigo: "+code);
       	this.getTweetsStudent(screenname);
+      	this.getPointsStudent(code);
+      	this.getAveragePointsCourse();
 	}
 
 dibujarNotas(){
@@ -173,7 +212,7 @@ cargarCalificador(){
     	'heigth':100,
     	'fgColor':'#66CC66',
     	'min':0,
-    	'max':100,
+    	'max':50,
     	'readOnly':true,
     	'angleOffset': -125,
 		'angleArc':250,
@@ -184,11 +223,12 @@ cargarCalificador(){
     	'heigth':100,
   		'fgColor':'#ff0000',
   		'min':0,
-    	'max':100,
+    	'max':50,
     	'readOnly':true,
     	'angleOffset': -125,
 		'angleArc':250,
     }); 
+    this.getAveragePointsCourse();
   }
 
 // <div className="container">
@@ -229,12 +269,12 @@ render(){
 			<div className="col"></div>
 			<div className="col-auto">
 				<h6>Course average</h6>
-				<input type="text" defaultValue="64" className="dialPromedio"/>
+				<input type="text" defaultValue="0" className="dialPromedio"/>
 			</div>
 			<div className="col-1"></div>
 			<div className="col-auto">
-				<h6>Your average</h6>
-				<input type="text" defaultValue="75" className="dialEstudiante"/>
+				<h6>Your points</h6>
+				<input type="text" defaultValue="0" className="dialEstudiante"/>
 			</div>
 			<div className="col"></div>
 		</div>

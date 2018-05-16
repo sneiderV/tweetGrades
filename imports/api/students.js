@@ -45,7 +45,7 @@ if (Meteor.isServer) {
 	    const getTweets = Meteor.wrapAsync(T.get, T);
 	    //  search twitter for all tweets containing the word '#WebDev @Uniandes' /// since:2011-11-11
 	    try {
-	      return getTweets('statuses/user_timeline', { screen_name: screenname, count: 10 });
+	      return getTweets('statuses/user_timeline', { screen_name: screenname, count: 20 });
     	} 
     	catch (error) { throw new Meteor.Error(error.name, error.message);}
   	}
