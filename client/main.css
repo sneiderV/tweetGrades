@@ -22,6 +22,10 @@
     padding: 20px;
 }
 
+.stackApp{
+    background-color: black;
+}
+
 .divVisualitation{
 	padding-top: 20px;
 }
@@ -47,7 +51,7 @@
   stroke-width: 8.5px;
 }
 .proof{
-	/*background-image: url(https://pre00.deviantart.net/6f68/th/pre/f/2012/274/3/a/twitter_minimalistic_background_by_vaughnwhiskey-d5gityo.png);*/
+	background-image: url(https://pre00.deviantart.net/6f68/th/pre/f/2012/274/3/a/twitter_minimalistic_background_by_vaughnwhiskey-d5gityo.png);
 	background-attachment: fixed; 
 	background-repeat: no-repeat; 
 	background-position: center;

@@ -225,7 +225,6 @@ render(){
 		  	<img style={{width: 30 , heigth:30 }} src="https://store-images.s-microsoft.com/image/apps.54178.13548944327891380.9678aa3c-94b5-4326-8f29-886220160bf7.d926c117-cc96-450e-bc06-b3609d08dc24?w=180&h=180&q=60" alt="john alexis guerra" className="rounded-circle"/>
 		  	TweetGrades
 		  </a>
-			
 		  <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
 		    <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
 		      <li className="nav-item active">
@@ -238,15 +237,13 @@ render(){
 		        <a className="nav-link" href="#myTweets">My Tweets </a>
 		      </li>
 		      <li className="nav-item active">
-		      	<a className="nav-link"> Are you Teacher Assistant? <AccountsUI/> </a>
+		    	<a className="nav-link form-inline "> Are you Teacher Assistant? <AccountsUI/> </a>
 		      </li>
 		    </ul>
-		    
 		  </div>
 		</nav>
 
-
-		<div id="home" >
+		<div id="home" className="container-fluid">
 			<div className="row">
 				<div className="col-6 divHome" >
 				<div className="row">
