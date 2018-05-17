@@ -48,7 +48,7 @@ class App extends Component{
             	<div id="containerTweets" className="card-columns">
             	{ 	res.map((t)=>{
             			return (
-            				<div id={t.id_str} className="card" style={{width: 15+'rem'}} >
+            				<div id={t.id_str} className="card" style={{width: 23+'rem'}} >
             					<div className="card-body">
             						<div className="media">
 	            						<img src={t.user.profile_image_url} alt="profile image" className="rounded-circle"/>
@@ -58,7 +58,7 @@ class App extends Component{
 	            						</div>
             						</div>
             						<p className="card-text">{t.text}</p>
-            						<h6 className="card-subtitle mb-2 text-muted">{t.created_at}</h6>
+            						<p class="card-text"><small class="text-muted">{t.created_at}</small></p>
             						<a href={t.entities.urls.map((u)=>{return u.expanded_url})}>
             							see your tweet
             							<img style={{width: 30 , heigth:20 }} src="https://vignette.wikia.nocookie.net/es.starwars/images/9/92/Twitter_Icon.png/revision/latest?cb=20151201204526" alt="profile image" className="rounded-circle"/>
@@ -74,9 +74,6 @@ class App extends Component{
             ReactDOM.render(tweets, document.getElementById('rootTWEETS'));
             console.log(">> datos de los Tweets: ");
             console.log(res);
-            this.setState({ 
-      		tweetsStudent : res,
-      		});
         });
 	}
 
@@ -159,9 +156,9 @@ cargarCalificador(){
  componentDidMount() {
 
     $(".dialPromedio").knob({
-    	'width':150,
-    	'heigth':100,
-    	'fgColor':'#66CC66',
+    	'width':200,
+    	'heigth':200,
+    	'fgColor':'#2DE300',
     	'min':0,
     	'max':50,
     	'readOnly':true,
@@ -170,9 +167,9 @@ cargarCalificador(){
 	}); 
 
     $(".dialEstudiante").knob({
-    	'width':150,
-    	'heigth':100,
-  		'fgColor':'#ff0000',
+    	'width':200,
+    	'heigth':200,
+  		'fgColor':'#E2FF00',
   		'min':0,
     	'max':50,
     	'readOnly':true,
@@ -257,7 +254,7 @@ render(){
 
 				<div className="col-6 homeDescription">
 					
-					<h5 >Web Development ~ Uniandes</h5>
+					<h3 >Web Development ~ Uniandes</h3>
 					<br/>
 				    <p >This course offers the fundamentals for understanding modern web development. 
 				    	At the end of this course students should be able to build modern web applications 
@@ -269,13 +266,15 @@ render(){
 				    </a>
 				    </span> <br/><br/>
 				    <p >With <strong>TweetGrades</strong> the students can view his current grade about Tweets participation. 
-				    	you just need to put your code in the space below.</p>
+				    	you just need to put your code in the space below. Keep in mind that the valid format for the tweets is 
+				    	&nbsp;<strong>#WebDev @Uniandes </strong> </p>
 				</div>
 			</div>
 		</div>
 
 		<div id="visualitation" className="divVisualitation">
 			
+			<div className="contentHome">
 			<div id="searchCode"className="row">
 				<div className="col"></div>
 				<div className="col-5">
@@ -290,17 +289,18 @@ render(){
 			<div id="dials" className="row">
 				<div className="col"></div>
 				<div className="col-auto">
-					<h6>Course average</h6>
+					<h3>Course average</h3>
 					<input type="text" defaultValue="0" className="dialPromedio"/>
 				</div>
 				<div className="col-1"></div>
 				<div className="col-auto">
-					<h6>Your points</h6>
+					<h3>Your points</h3>
 					<input type="text" defaultValue="0" className="dialEstudiante"/>
 				</div>
 				<div className="col"></div>
 			</div>
-			
+			</div>
+
 			<div className="row">
 				<div className="col-1"></div>
 				<LineChart update={this.state.update} students={this.props.students}/>
