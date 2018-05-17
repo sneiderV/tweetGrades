@@ -217,6 +217,35 @@ render(){
 		<center>
 		<div >
 
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <a class="navbar-brand" href="#home">
+		  	<img style={{width: 30 , heigth:30 }} src="https://store-images.s-microsoft.com/image/apps.54178.13548944327891380.9678aa3c-94b5-4326-8f29-886220160bf7.d926c117-cc96-450e-bc06-b3609d08dc24?w=180&h=180&q=60" alt="john alexis guerra" className="rounded-circle"/>
+		  	TweetGrades
+		  </a>
+
+		  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+		    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link" href="#visualitation">Visualitation</a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link" href="#myTweets">My Tweets </a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link" href="#">Sign in </a>
+		      </li>
+		    </ul>
+		    
+		  </div>
+		</nav>
+
+
 		<div id="home" >
 			<div className="row">
 				<div className="col-6 divHome" >
