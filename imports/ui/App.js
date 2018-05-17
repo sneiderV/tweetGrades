@@ -25,6 +25,7 @@ class App extends Component{
 			currentScreenName : "sin usuario",
 			currentAverageStudent : 0,
 			currentAverageCourse: 0,
+			tweetsStudent :[],
 			update:false
 		};
 	}
@@ -43,9 +44,40 @@ class App extends Component{
 	getTweetsStudent(screenname){
 		Meteor.call('darTweetsStudent',screenname,(err,res) => {
             if(err) throw err;
+            const tweets = (
+            	<div id="containerTweets" className="card-columns">
+            	{ 	res.map((t)=>{
+            			return (
+            				<div id={t.id_str} className="card" style={{width: 15+'rem'}} >
+            					<div className="card-body">
+            						<div className="media">
+	            						<img src={t.user.profile_image_url} alt="profile image" className="rounded-circle"/>
+	            						<div className="media-body">
+		            						<h5 className="card-title">{t.user.name}</h5>
+		            						<h6 className="card-subtitle mb-2 text-muted">@{t.user.screen_name}</h6>
+	            						</div>
+            						</div>
+            						<p className="card-text">{t.text}</p>
+            						<h6 className="card-subtitle mb-2 text-muted">{t.created_at}</h6>
+            						<a href={t.entities.urls.map((u)=>{return u.expanded_url})}>
+            							see your tweet
+            							<img style={{width: 30 , heigth:20 }} src="https://vignette.wikia.nocookie.net/es.starwars/images/9/92/Twitter_Icon.png/revision/latest?cb=20151201204526" alt="profile image" className="rounded-circle"/>
+            						</a>
+            					</div>
+							
+            				</div>
+            			);
+            		})
+            	}
+            	</div>
+            );
+            ReactDOM.render(tweets, document.getElementById('rootTWEETS'));
             console.log(">> datos de los Tweets: ");
             console.log(res);
-        }); 
+            this.setState({ 
+      		tweetsStudent : res,
+      		});
+        });
 	}
 
 	//busca el screen_name de un estudiante dado el codigo
@@ -116,8 +148,6 @@ class App extends Component{
       	this.getAveragePointsCourse();
 	}
 
-
-
 /**
 * Se encarga de llevar a la pantalla de calificador, en el caso de que sea el usuario deseado
 * el que se ha logueado.
@@ -162,6 +192,11 @@ cargarCalificador(){
 // 		</div>
 // 		</div>
 
+// <blockquote className="twitter-tweet">
+// 		<a href="https://twitter.com/SneiderVG/status/993350996242911233" data-datetime="2012-12-03T18:51:11+00:00"></a>
+// </blockquote>
+
+// <button type="button" onClick={this.getScreenName}>Tweets!</button>
 verificarUsuario(){
 	return(
 		this.props.currentUser.username==="mini-dictador" ||
@@ -181,9 +216,9 @@ render(){
 		<div className="proof">
 		<center>
 		<div >
-		<h1 className="whiteT">TweetGrades</h1>
-		<h5 className="whiteT">WebDev ~ Uniandes</h5>
-		<button type="button" onClick={this.getScreenName}>Tweets!</button>
+		<h1 className="blueT">TweetGrades</h1>
+		<h5 className="blueT">WebDev ~ Uniandes</h5>
+		
 		<div className="row">
 		<div className="col"></div>
 		<div className="col-2">
@@ -215,13 +250,19 @@ render(){
 		<div className="col-1"></div>
 		</div>	
 
-		<blockquote class="twitter-tweet">
-			<a href="https://twitter.com/SneiderVG/status/993350996242911233" data-datetime="2012-12-03T18:51:11+00:00">December 3, 2012</a>
-		</blockquote>
+		<br/>
+		<div className="divTweets">
+			<h1 className="whiteT">These are your course tweets</h1>
+			<div id="rootTWEETS" className="row divTweets"> 
+				<h4 className="whiteT">Put your code above and turn back here to see.</h4>
+			</div>
+		</div>
+		
 
+		
 		</div>
 		</center>
-		<br/><br/><br/><br/>
+		
 		</div>
 		);
 }

@@ -1,6 +1,10 @@
 /* CSS declarations go here */
 .whiteT{
-	/*color: white;*/
+	color: white;
+	text-align: center;
+	/*color: #137ed9;*/
+}
+.blueT{
 	color: #137ed9;
 }
 .line {
@@ -25,7 +29,14 @@
 	color: #137ed9;
 	font-weight: bold;
 }
+.divTweets{
+	background-color: #00d7ff;
+	padding-top: 30px;
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-bottom: 20px; 
 
+}
 div.twitter-tweet-rendered p.entry-title {
     font-family: Arial, sans-serif !important;
     font-size: 14px !important;
