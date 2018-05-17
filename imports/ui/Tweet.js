@@ -6,50 +6,39 @@ export default class Tweet extends Component {
 		super(props);
 
 		this.handleSwipeLeft=this.handleSwipeLeft.bind(this);
-		this.handleSwipeDown=this.handleSwipeDown.bind(this);
+		this.handlePressDown=this.handlePressDown.bind(this);
 		this.handleSwipeRight=this.handleSwipeRight.bind(this);
-		this.handleSwipeUp=this.handleSwipeUp.bind(this);
+
+		this.leftpoints=0;
+		this.downpoints=1;
+		this.rightpoints=2;
 		
 	}
 
 	//Por aqui se comunica con la clase padre.
-	calificarTweet(){
-		this.props.calificarTweet();
-	}
-
-
 	handleSwipeLeft(){
-		console.log("handleSwipeLeft");
+		this.props.calificarTweet(this.props.twitteruser,this.leftpoints);
 	}
 
-	handleSwipeDown(){
-		console.log("handleSwipeDown");
+	handlePressDown(){
+		this.props.calificarTweet(this.props.twitteruser,this.downpoints);
 	}
 
 	handleSwipeRight(){
-		console.log("handleSwipeRight");
+		this.props.calificarTweet(this.props.twitteruser,this.rightpoints);
 	}
 
-	handleSwipeUp(){
-		console.log("handleSwipeUp");
-	}
+
 
 	render() {
-		//Oldie
-		// <div className="col">
-				// <h6>{this.props.name}</h6>
-				// <p>{this.props.date}</p>
-				// <p>{this.props.text}</p>
-			// </div>
 
 		return (
 			
 			<Hammer id={this.props.name} className="card" style={{width: 15+'rem'}}
 			
 				onSwipeLeft={this.handleSwipeLeft}
-				onSwipeDown={this.handleSwipeDown} 
+				onPress={this.handlePressDown} 
 				onSwipeRight={this.handleSwipeRight}
-				onSwipeUp={this.handleSwipeUp}
 			>
 				<div className="card-body">
 					<div className="media">
