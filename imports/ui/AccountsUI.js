@@ -15,13 +15,8 @@ export default class AccountsUI extends Component {
   }
   render() {
     // Just render a placeholder container that will be filled in
-    return (
-      <div className="headerlogin">
-      <center>
-        <p className="sign-in-text">Are you a Teaching Assistant?</p> 
-        <p ref="container"/> 
-      </center>
-      </div>
+    return (   
+        <span ref="container"></span>        
       );
   }
 }
