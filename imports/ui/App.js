@@ -216,9 +216,39 @@ render(){
 		<div className="proof">
 		<center>
 		<div >
-		<h1 className="blueT">TweetGrades</h1>
-		<h5 className="blueT">WebDev ~ Uniandes</h5>
-		
+
+		<div>
+			<div className="row">
+				<div className="col-6 divHome" >
+				<div className="row">
+					<div className="col">
+						<br/>
+						<img style={{width: 300 , heigth:450 }} src="https://store-images.s-microsoft.com/image/apps.54178.13548944327891380.9678aa3c-94b5-4326-8f29-886220160bf7.d926c117-cc96-450e-bc06-b3609d08dc24?w=180&h=180&q=60" alt="john alexis guerra" className="rounded-circle"/>
+						<h1 className="blueT">TweetGrades</h1>
+					</div>
+				</div>
+				</div>
+
+				<div className="col-6 homeDescription">
+					
+					<h5 >Web Development ~ Uniandes</h5>
+					<br/>
+				    <p >This course offers the fundamentals for understanding modern web development. 
+				    	At the end of this course students should be able to build modern web applications 
+				    	using cutting edge technologies.</p> 
+				    <span>Teacher:  &nbsp; 
+				    <a href="http://johnguerra.co/">
+				    	<img style={{width: 40 , heigth:30 }} src="https://avatars1.githubusercontent.com/u/1216843?s=460&v=4" alt="john alexis guerra" className="rounded-circle"/>
+				    	 &nbsp; Jhon Alexis Guerra Gómez
+				    </a>
+				    </span> <br/><br/>
+				    <p >With <strong>TweetGrades</strong> the students can view his current grade about Tweets participation. 
+				    	you just need to put your code in the space below.</p>
+				</div>
+			</div>
+		</div>
+
+
 		<div className="row">
 		<div className="col"></div>
 		<div className="col-2">
