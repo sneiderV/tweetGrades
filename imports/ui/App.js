@@ -217,7 +217,7 @@ render(){
 		<center>
 		<div >
 
-		<div>
+		<div id="home" >
 			<div className="row">
 				<div className="col-6 divHome" >
 				<div className="row">
@@ -248,47 +248,47 @@ render(){
 			</div>
 		</div>
 
-
-		<div className="row">
-		<div className="col"></div>
-		<div className="col-2">
-			<form onSubmit={this.handleSearch.bind(this)} >
-				<input type="number" className="form-control" ref="code" placeholder="Enter your code and press Enter!"/>
-			</form>	
-		</div>
-		<div className="col"></div>
-		</div>
-		<br/>
-		<div className="row">
-			<div className="col"></div>
-			<div className="col-auto">
-				<h6>Course average</h6>
-				<input type="text" defaultValue="0" className="dialPromedio"/>
+		<div id="visualitation" className="divVisualitation">
+			
+			<div id="searchCode"className="row">
+				<div className="col"></div>
+				<div className="col-5">
+					<h2>Know now your state!</h2>
+					<form onSubmit={this.handleSearch.bind(this)} >
+						<input type="number" className="form-control" ref="code" placeholder="Enter your code and press Enter!"/>
+					</form>	
+				</div>
+				<div className="col"></div>
+			</div> <br/>
+			
+			<div id="dials" className="row">
+				<div className="col"></div>
+				<div className="col-auto">
+					<h6>Course average</h6>
+					<input type="text" defaultValue="0" className="dialPromedio"/>
+				</div>
+				<div className="col-1"></div>
+				<div className="col-auto">
+					<h6>Your points</h6>
+					<input type="text" defaultValue="0" className="dialEstudiante"/>
+				</div>
+				<div className="col"></div>
 			</div>
-			<div className="col-1"></div>
-			<div className="col-auto">
-				<h6>Your points</h6>
-				<input type="text" defaultValue="0" className="dialEstudiante"/>
-			</div>
-			<div className="col"></div>
+			
+			<div className="row">
+				<div className="col-1"></div>
+				<LineChart update={this.state.update} students={this.props.students}/>
+				<div className="col-1"></div>
+			</div> <br/>
+
 		</div>
 
-		
-		<div className="row">
-		<div className="col-1"></div>
-		<LineChart update={this.state.update} students={this.props.students}/>
-		<div className="col-1"></div>
-		</div>	
-
-		<br/>
-		<div className="divTweets">
+		<div id="myTweets" className="divTweets">
 			<h1 className="whiteT">These are your course tweets</h1>
 			<div id="rootTWEETS" className="row divTweets"> 
 				<h4 className="whiteT">Put your code above and turn back here to see.</h4>
 			</div>
 		</div>
-		
-
 		
 		</div>
 		</center>
