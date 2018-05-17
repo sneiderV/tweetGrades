@@ -225,6 +225,7 @@ render(){
 		  	<img style={{width: 30 , heigth:30 }} src="https://store-images.s-microsoft.com/image/apps.54178.13548944327891380.9678aa3c-94b5-4326-8f29-886220160bf7.d926c117-cc96-450e-bc06-b3609d08dc24?w=180&h=180&q=60" alt="john alexis guerra" className="rounded-circle"/>
 		  	TweetGrades
 		  </a>
+			<AccountsUI/>
 
 		  <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
 		    <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
