@@ -119,29 +119,47 @@ class Calificador extends Component {
 				    </ul>
 				  </div>
 				</nav>
-
+<div className="container-fluid">
 				<div className="row">
-					<div id="left-bar-calificador" className="col-4 bar-calificador"> 
-						<div>
-							<h4>Grade your students: </h4>
-							<div className="alert alert-success">Swipe right <b>(2 points)</b> if the tweet is interesting and original </div>
-							<div className="alert alert-warning">Press and hold down <b>(1 point)</b> if the tweet is interesting but was said before</div>
-							<div className="alert alert-danger">Swipe left <b>(0 points)</b> if the tweet is not interesting nor original </div>
-							<div className="alert alert-secondary">If the student didn't tweet, (s)he gets <b>-1 points</b> by default</div>
+					<div id="left-bar-calificador" className="col-4 bar-calificador card text-white bg-secondary mb-3"> 
+
+						<div className="card text-white bg-dark mb-3">
+							<div className="card-body">
+								<h4> Section 1 (Tuesday and thursday):</h4>
+								<p>You have <b>{this.tweetsFaltantes(1)}</b> tweets left to grade</p>
+								<div className="progress" style={{height: 20+"px"}}>
+	  								<div className="progress-bar bg-success" role="progressbar" style={{ width: 100-(5*this.tweetsFaltantes(1))+"%"}} aria-valuenow="0" aria-valuemin="0" aria-valuemax="25"> {100-(5*this.tweetsFaltantes(1))}% </div>
+								</div>
+								<h4> Seccion 2 (Monday and friday):</h4>
+								<p>You have <b>{this.tweetsFaltantes(2)}</b> tweets left to grade</p>
+								<div className="progress" style={{height: 20+"px"}}>
+	  								<div className="progress-bar bg-success" role="progressbar" style={{ width: 100-(5*this.tweetsFaltantes(2))+"%"}} aria-valuenow="0" aria-valuemin="0" aria-valuemax="25"> {100-(5*this.tweetsFaltantes(2))}% </div>
+								</div>
+							</div>
 						</div>
-						<div>
-							<h4> Section 1 (Tuesday and thursday):</h4>
-							<p>You have <b>{this.tweetsFaltantes(1)}</b> tweets left to grade</p>
-							<h4> Seccion 2 (Monday and friday):</h4>
-							<p>You have <b>{this.tweetsFaltantes(2)}</b> tweets left to grade</p>
+
+						<div className="card text-white bg-dark mb-3">
+							<div class="card-header"><h4 className="card-title">Grade your students: </h4></div>
+							<img className="card-img-top" src="..." alt="Instructions card"/>
+							<div className="card-body">
+								
+								<div className="alert alert-success">Swipe right <b>(2 points)</b> if the tweet is interesting and original </div>
+								<div className="alert alert-warning">Press and hold down <b>(1 point)</b> if the tweet is interesting but was said before</div>
+								<div className="alert alert-danger">Swipe left <b>(0 points)</b> if the tweet is not interesting nor original </div>
+								<div className="alert alert-secondary">If the student didn't tweet, (s)he gets <b>-1 points</b> by default</div>
+							</div>
 						</div>
-						<h5><b>Remember to grade weekly or tweetGrades won't be able to show you missing tweets!</b></h5>
+
+						<br/><h5 class="font-italic" ><b>Remember to grade weekly or tweetGrades won't be able to show you missing tweets!</b></h5>
 					</div>
 	
 					{/*Aqui va lo de hammer*/}
-					<div id="right-bar-calificador" className="col-8 bar-calificador">
-						<h4> Grade the latest tweets!</h4> 
+					<div id="right-bar-calificador" className="col-8 bar-calificador proof card">
+						<center>
+						<div className="container">
+						<h2 className="whiteT"> Grade the latest tweets!</h2> 
 						<div className="row">
+						<div className="card-columns">
 						{this.state.tweets
 							//Solo si tiene seccion valida (eliminar cuentas raras)
 							.filter((t)=>t.seccion>0)
@@ -149,17 +167,23 @@ class Calificador extends Component {
 							.filter((t)=>!this.yaCalificado(t.id_str))
 							//Le paso los params necesarios a los que quedan
 							.map((t)=>(
-							<Tweet 
-								key={t.id_str} id_str={t.id_str} profile_image_url={t.user.profile_image_url} 
-								twitteruser={t.user.screen_name} name={t.user.name} 
-								created_at={t.created_at} text={t.text}
-								urls={t.entities.urls} calificarTweet={this.calificarTweet}
-								seccion={t.seccion}
-								/>
+								<div className="grow">
+									<Tweet className="card"
+										key={t.id_str} id_str={t.id_str} profile_image_url={t.user.profile_image_url} 
+										twitteruser={t.user.screen_name} name={t.user.name} 
+										created_at={t.created_at} text={t.text}
+										urls={t.entities.urls} calificarTweet={this.calificarTweet}
+										seccion={t.seccion}
+										/>
+								</div>
 							))}	
 						</div>
+						</div>
+						</div>
+						</center>
 					</div>
 				</div>
+</div>
 			</div>
 		);
 	}

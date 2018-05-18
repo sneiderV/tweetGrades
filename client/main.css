@@ -114,7 +114,28 @@ div.twitter-tweet-rendered div.footer a.view-details span {
 /*Calificador*/
 .bar-calificador {
     /*borrar este borde tan feo:*/
-    border-style: groove;
-    margin:3px 0;
-    padding: 7px 0;
+    
+    padding: 10px 0;
+}
+
+/*used for viz tweet in dictador*/
+.grow:hover
+{
+-webkit-transform: scale(1.3);
+-ms-transform: scale(1.01);
+transform: scale(1.05);
+}
+
+.fade:hover
+{
+        opacity:3;
+}
+.threed:hover
+{
+box-shadow:
+1px 1px #53a7ea,
+2px 2px #53a7ea,
+3px 3px #53a7ea;
+-webkit-transform: translateX(-3px);
+transform: translateX(-3px);
 }
