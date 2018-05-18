@@ -6,6 +6,7 @@ import * as d3 from "d3";
 import knob from 'jquery-knob';
 import $ from 'jquery';
 import ReactDOM from 'react-dom';
+import moment from "moment";
 //DB y metodos
 import { Students } from "../api/students.js";
 //Componentes
@@ -58,7 +59,7 @@ class App extends Component{
 	            						</div>
             						</div>
             						<p className="card-text">{t.text}</p>
-            						<p className="card-text"><small className="text-muted">{t.created_at}</small></p>
+            						<p className="card-text"><small className="text-muted">{moment(t.created_at).toString()}</small></p>
             						<a href={t.entities.urls.map((u)=>{return u.expanded_url})}>
             							see your tweet
             							<img style={{width: 30 , heigth:20 }} src="https://vignette.wikia.nocookie.net/es.starwars/images/9/92/Twitter_Icon.png/revision/latest?cb=20151201204526" alt="profile image" className="rounded-circle"/>

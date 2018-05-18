@@ -1,7 +1,6 @@
 import { Meteor } from "meteor/meteor";
 import { Mongo } from "meteor/mongo";
 import { check } from "meteor/check";
-import moment from "moment";
 
 //manejo de collection en Mongo
 export const Students = new Mongo.Collection("students");
@@ -14,7 +13,6 @@ if (Meteor.isServer) {
     return Students.find();
   });
 
-  console.log("moment",moment);
 
   Meteor.methods({
 
@@ -32,8 +30,8 @@ if (Meteor.isServer) {
 	    const getTweets = Meteor.wrapAsync(T.get, T);
 	    //  search twitter for all tweets containing the word '#WebDev @Uniandes' /// since:2011-11-11
 	    try {
-	      let tweets = getTweets('search/tweets', { q: '#WebDev @Uniandes', count: 100 });
-
+	      return getTweets('search/tweets', { q: '#WebDev @Uniandes', count: 100 });
+	      
     	} 
     	catch (error) { throw new Meteor.Error(error.name, error.message);}
   	},
