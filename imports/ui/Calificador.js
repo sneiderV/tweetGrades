@@ -121,6 +121,8 @@ class Calificador extends Component {
 				</nav>
 <div className="container-fluid">
 				<div className="row">
+
+					{/*Aqui va la información*/}
 					<div id="left-bar-calificador" className="col-4 bar-calificador card text-white bg-secondary mb-3"> 
 
 						<div className="card text-white bg-dark mb-3">
@@ -140,7 +142,9 @@ class Calificador extends Component {
 
 						<div className="card text-white bg-dark mb-3 ">
 							<div className="card-header"><h4 className="card-title ">Grade your students: </h4></div>
-							<img className="card-img-top" src="..." alt="Instructions card"/>
+							<center>
+							<img  style={{width: 250 , heigth:260 }} src="https://raw.githubusercontent.com/sneiderV/img/master/img2.jpg?token=AT1gozR5ITpgJhzu1llEw_KRNzgLzyI8ks5bCJ3BwA%3D%3D" alt="Instructions card"/>
+							</center>
 							<div className="card-body">
 								
 								<div className="alert alert-success">Swipe right <b>(2 points)</b> if the tweet is interesting and original </div>
