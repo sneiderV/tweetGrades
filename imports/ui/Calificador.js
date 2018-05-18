@@ -31,7 +31,7 @@ class Calificador extends Component {
 	darTweets(){
 		Meteor.call('darTweets',(err,res) => {
       if(err) throw err;
-      console.log(">> Tweet data received");
+      // console.log(">> Tweet data received");
       let tweets = res.statuses;
 			if(this.props.students.length>0)
       	tweets.forEach((t)=>{
@@ -52,10 +52,12 @@ class Calificador extends Component {
 	}
 
 	//A cada tweet se le debe pasar esta funcion, para que haga render
-	calificarTweet(twitteruser, puntos){
+	calificarTweet(twitteruser, puntos, idTweet, posClase){
 		//Agregar puntaje
-		console.log("calificar Tweet de "+twitteruser+" con "+puntos+" puntos");
+		console.log("calificar Tweet de "+twitteruser+" con "+puntos+" puntos y en clase #"+posClase);
 		//agregar id de tweet
+		console.log("registrar id tweet: "+idTweet);
+		Meteor.call("calificarTweet",twitteruser, puntos, idTweet, posClase);
 	}
 
 	encontrarSeccion(screen_name){
@@ -69,6 +71,31 @@ class Calificador extends Component {
 		return seccion;
 	}
 
+	//Verifica si el id de un tweet ya se ingresó a la DB
+	yaCalificado(id_str){
+		let calificado = false;
+		this.props.students.forEach((s)=>{
+			s.idtweets.forEach((id)=>{
+				let comp = id===id_str;
+				console.log("comp", comp);
+				//Ya se califico, pues guardo el id
+				if(id===id_str) calificado = true;
+			})
+		});
+		return calificado;
+	}
+
+	tweetsFaltantes(seccion){
+		return this.state.tweets
+						//Solo si tiene seccion valida (eliminar cuentas raras)
+						.filter((t)=>t.seccion>0)
+						//Solo si no he calificado (comparar con idTweet de students)
+						.filter((t)=>!this.yaCalificado(t.id_str))
+						//Solo los de la seccion ingresada por parámetro
+						.filter((t)=>t.seccion===seccion)
+						.length;
+	}
+
 	render() {
 		if(!this.props.currentUser)
 			this.cargarHome();
@@ -76,7 +103,23 @@ class Calificador extends Component {
 		return (
 
 			<div>
-				<AccountsUI/>
+				<nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+				  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+				    <span className="navbar-toggler-icon"></span>
+				  </button>
+				  <a className="navbar-brand" href="#home">
+				  	<img style={{width: 30 , heigth:30 }} src="https://store-images.s-microsoft.com/image/apps.54178.13548944327891380.9678aa3c-94b5-4326-8f29-886220160bf7.d926c117-cc96-450e-bc06-b3609d08dc24?w=180&h=180&q=60" alt="john alexis guerra" className="rounded-circle"/>
+				  	TweetGrades
+				  </a>
+				  <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
+				    <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+				      <li className="nav-item active">
+				    	<a className="nav-link form-inline "> Want to see Student view? Sign out! <AccountsUI/> </a>
+				      </li>
+				    </ul>
+				  </div>
+				</nav>
+
 				<div className="row">
 					<div id="left-bar-calificador" className="col-4 bar-calificador"> 
 						<div>
@@ -87,16 +130,12 @@ class Calificador extends Component {
 							<div className="alert alert-secondary">If the student didn't tweet, (s)he gets <b>-1 points</b> by default</div>
 						</div>
 						<div>
-							<h4>Count</h4>
-							<p>Es decir en total cuantos tweets se han calificado</p>
+							<h4> Section 1 (Tuesday and thursday):</h4>
+							<p>You have <b>{this.tweetsFaltantes(1)}</b> tweets left to grade</p>
+							<h4> Seccion 2 (Monday and friday):</h4>
+							<p>You have <b>{this.tweetsFaltantes(2)}</b> tweets left to grade</p>
 						</div>
-						<div>
-							<h4> Seccion 1:</h4>
-							<p>Faltan 3</p>
-							<h4> Seccion 2:</h4>
-							<p>Faltan 5</p>
-						</div>
-						<div></div>
+						<h5><b>Remember to grade weekly or tweetGrades won't be able to show you missing tweets!</b></h5>
 					</div>
 	
 					{/*Aqui va lo de hammer*/}
@@ -106,11 +145,12 @@ class Calificador extends Component {
 						{this.state.tweets
 							//Solo si tiene seccion valida (eliminar cuentas raras)
 							.filter((t)=>t.seccion>0)
-							//TODO Solo si no he calificado (comparar con idTweet de students)
+							//Solo si no he calificado (comparar con idTweet de students)
+							.filter((t)=>!this.yaCalificado(t.id_str))
 							//Le paso los params necesarios a los que quedan
 							.map((t)=>(
 							<Tweet 
-								key={t.id_str} profile_image_url={t.user.profile_image_url} 
+								key={t.id_str} id_str={t.id_str} profile_image_url={t.user.profile_image_url} 
 								twitteruser={t.user.screen_name} name={t.user.name} 
 								created_at={t.created_at} text={t.text}
 								urls={t.entities.urls} calificarTweet={this.calificarTweet}

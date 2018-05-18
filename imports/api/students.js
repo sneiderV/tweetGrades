@@ -48,6 +48,52 @@ if (Meteor.isServer) {
 	      return getTweets('statuses/user_timeline', { screen_name: screenname, count: 20 });
     	} 
     	catch (error) { throw new Meteor.Error(error.name, error.message);}
+  	},
+
+  	"calificarTweet"(twitteruser, puntos, idTweet, posClase){
+  		check(twitteruser, String);
+			check(idTweet, String);
+			check(puntos,Number);
+			check(posClase,Number);
+			// let notasp = "notas.$."+posClase;
+			//Agrega el idtweet
+			Students.update(
+				{
+					twitteruser : twitteruser
+				}, 
+				{
+					// $set: 
+					// {
+					// 	"notas.$.25":puntos
+					// },
+					$push: 
+					{
+						"idtweets": idTweet
+					}
+				}
+				);
+			//obtiene las notas
+			let notas = Students.find({
+				twitteruser : twitteruser
+			},
+			{
+				notas:1,
+
+			}).fetch()[0].notas;
+			notas[posClase]=puntos;
+			// Actualiza las notas
+			Students.update(
+				{
+					twitteruser : twitteruser
+				}, 
+				{
+					$set:
+					{
+						notas:notas
+					}
+				}
+			);
+			console.log("grades from " +twitteruser+" updated.")
   	}
 
   }); // final of Meteor Methods

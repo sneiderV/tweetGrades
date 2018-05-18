@@ -17,17 +17,66 @@ export default class Tweet extends Component {
 
 	//Por aqui se comunica con la clase padre.
 	handleSwipeLeft(){
-		this.props.calificarTweet(this.props.twitteruser,this.leftpoints);
+		this.props.calificarTweet(
+			this.props.twitteruser,
+			this.leftpoints, 
+			this.props.id_str,
+			this.posicionClase()
+			);
 	}
 
 	handlePressDown(){
-		this.props.calificarTweet(this.props.twitteruser,this.downpoints);
+		this.props.calificarTweet(
+			this.props.twitteruser,
+			this.downpoints, 
+			this.props.id_str,
+			this.posicionClase()
+			);
 	}
 
 	handleSwipeRight(){
-		this.props.calificarTweet(this.props.twitteruser,this.rightpoints);
+		this.props.calificarTweet(
+			this.props.twitteruser,
+			this.rightpoints, 
+			this.props.id_str,
+			this.posicionClase()
+			);
 	}
 
+	//A partir de la fecha me dice a que clase pertenece
+	posicionClase(){
+		// El objetivo es sabe la posición de la clase en el arreglo
+		let posClase =-1;
+		// Tue May 08 12:46:58 +0000 2018
+		// console.log("splDate",this.props.created_at,typeof(this.props.created_at));
+		let splDate = this.props.created_at.split(" ");
+		let dia = splDate[0];
+		let mes = splDate[1];
+		let numDia = splDate[2];
+		// Asumimos que solo existe la sección 2
+		if(mes==="May"){
+			//desde el sabado pueden tweetear
+			if(numDia>11){
+				if(numDia>14 && numDia<=18)	return 25;
+				if(numDia<=14) return 24;
+			}
+			else if(numDia>4){
+				if(numDia>7 && numDia<=11)	return 23;
+				if(numDia<=7) return 22;
+			}
+			else{
+				return 21;
+			}
+
+		}
+		if(mes==="Apr"){
+			if(numDia>27)
+				return 20;
+		}
+		//probablemente esto sea -1, debe ser manejado como tweet fuera de tiempo
+		return posClase;
+
+	}
 
 
 	render() {
