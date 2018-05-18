@@ -278,7 +278,7 @@ render(){
 			<div id="searchCode"className="row">
 				<div className="col"></div>
 				<div className="col-5">
-					<h2>Know now your state!</h2>
+					<h2>Find out how you're doing!</h2>
 					<form onSubmit={this.handleSearch.bind(this)} >
 						<input type="number" className="form-control" ref="code" placeholder="Enter your code and press Enter!"/>
 					</form>	
