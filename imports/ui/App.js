@@ -58,7 +58,7 @@ class App extends Component{
 	            						</div>
             						</div>
             						<p className="card-text">{t.text}</p>
-            						<p class="card-text"><small class="text-muted">{t.created_at}</small></p>
+            						<p className="card-text"><small className="text-muted">{t.created_at}</small></p>
             						<a href={t.entities.urls.map((u)=>{return u.expanded_url})}>
             							see your tweet
             							<img style={{width: 30 , heigth:20 }} src="https://vignette.wikia.nocookie.net/es.starwars/images/9/92/Twitter_Icon.png/revision/latest?cb=20151201204526" alt="profile image" className="rounded-circle"/>
@@ -79,7 +79,7 @@ class App extends Component{
 
 	//busca el screen_name de un estudiante dado el codigo
 	getScreenName(code){
-		var snp = "no hay estudiante con ese codigo"; 
+		var snp = null; 
 		if(this.props.students.length>0){
 			this.props.students.map((s)=>
 				{
@@ -133,7 +133,10 @@ class App extends Component{
 		event.preventDefault();
 		const code = ReactDOM.findDOMNode(this.refs.code).value;
 	    var screenname = this.getScreenName(code);
-		
+		if(!screenname){
+			alert("no hay estudiante con ese codigo");
+			return;
+		}
 		this.setState({ 
       		currentCode: code,
       		currentScreenName : screenname,
@@ -200,6 +203,11 @@ verificarUsuario(){
 		this.props.currentUser.username==="dictador" ||
 		this.props.currentUser.username==="coima"
 		)
+}
+
+renderMensajeConCodigo(){
+	if(this.state.currentCode>0)
+		return (<h4>Showing grades for {this.state.currentScreenName}, with code {this.state.currentCode}</h4>);
 }
 
 render(){
@@ -285,7 +293,6 @@ render(){
 				</div>
 				<div className="col"></div>
 			</div> <br/>
-			
 			<div id="dials" className="row">
 				<div className="col"></div>
 				<div className="col-auto">
@@ -299,11 +306,12 @@ render(){
 				</div>
 				<div className="col"></div>
 			</div>
+			{this.renderMensajeConCodigo()}
 			</div>
 
 			<div className="row">
 				<div className="col-1"></div>
-				<LineChart update={this.state.update} students={this.props.students}/>
+				<LineChart currentCode={this.state.currentCode} students={this.props.students}/>
 				<div className="col-1"></div>
 			</div> <br/>
 
@@ -322,12 +330,7 @@ render(){
 		</div>
 		);
 }
-
-componentDidUpdate(prevProps, prevState) {
 }
-
-}
-
 export default withTracker(()=>{
 	//Se suscribe a la publicación de students
 	Meteor.subscribe("students");

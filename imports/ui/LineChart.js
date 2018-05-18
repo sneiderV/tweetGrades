@@ -6,6 +6,8 @@ export default class LineChart extends Component {
 	constructor(props){
 		super(props);
 		this.svg = React.createRef();
+		//fechas de clases
+		this.fechas = ["01/26","01/29","02/02","02/05","02/09","02/12","02/19","02/23","02/26","03/02","03/12","03/16","03/23","04/06","04/09","04/13","04/16","04/20","04/23","04/27","04/30","05/04","05/07","05/11","05/14","05/18"]
 
 	}
 
@@ -33,20 +35,22 @@ export default class LineChart extends Component {
 		y = d3.scaleLinear().range([height, 0]),
 		z = d3.scaleOrdinal(d3.schemeCategory10);
 
+		let fechas = this.fechas;
 		var line = d3.line()
 			//.curve(d3.curveBasis)
 			.x(function(d, index) { return x(index); })
 			.y(function(d) { return y(d); });
 
-
 			x.domain([
-				d3.min(students, function(c) { return d3.min(c.notas); }),
-				d3.max(students, function(c) { return d3.max(c.notas, function(d, index) { return index; }); })
+				d3.min(this.fechas, function(c,i) { return i; }),
+				d3.max(this.fechas, function(c,i) { return i; })
+				// d3.min(students, function(c) { return d3.min(c.notas, function(d, index) { return index; }); }),
+				// d3.max(students, function(c) { return d3.max(c.notas, function(d, index) { return index; }); })
 				]);
 
 			y.domain([
 				d3.min(students, function(c) { return d3.min(c.notas); }),
-				d3.max(students, function(c) { return d3.max(c.notas, function(d) { return d; }); })
+				d3.max(students, function(c) { return d3.max(c.notas); })
 				]);
 
 			z.domain(students.map(function(c) { return c.id; }));
@@ -85,17 +89,28 @@ export default class LineChart extends Component {
 		//se agregan los valores de cada linea
 		student.append("path")
 		.attr("class", "line")
+		.attr("id", function(d) {		return "line"+d.codigo;})
 		.attr("d", function(d) {return line(d.notas); })
 		.style("stroke", function(d, index) {  return z(index); });
 
-		// Aqui cargamos el nombre y estilo de cada linea
-		// student.append("text")
-		// .datum(function(d) {  return {id: "@"+d.twitteruser}; })
-		// .attr("transform", "rotate(0)")
-		// .attr("x", 3)
-		// .attr("dy", "0.35em")
-		// .style("font", "10px sans-serif")
-		// .text(function(d) { return d.id; });
+		if(this.props.currentCode >0)
+			this.seleccionarCodigo(this.props.currentCode);
+	}
+
+	seleccionarCodigo(codigo){
+		// Se opacan todos
+		d3.selectAll("path")
+			.style("opacity", 0.7)
+	    .style("stroke", "#888");
+
+	  // El seleccionado
+	  d3.selectAll("#line"+codigo)
+	  	.transition()
+      .duration(2000)
+      .attr("r", 10)
+      .style("opacity", 1.0)
+      .style("stroke", "red")
+      .style("stroke-width", "8.5px");
 	}
 
 	render() {
