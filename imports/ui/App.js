@@ -12,6 +12,7 @@ import { Students } from "../api/students.js";
 //Componentes
 import AccountsUI from "./AccountsUI.js";
 import LineChart from "./LineChart.js";
+import swal from 'sweetalert';
 
 class App extends Component{
 	constructor(props){
@@ -135,7 +136,7 @@ class App extends Component{
 		const code = ReactDOM.findDOMNode(this.refs.code).value;
 	    var screenname = this.getScreenName(code);
 		if(!screenname){
-			alert("no hay estudiante con ese codigo");
+			swal("you are not a student of this course!", "or check if your code is correct", "warning");
 			return;
 		}
 		this.setState({ 
@@ -228,7 +229,7 @@ render(){
 		    <span className="navbar-toggler-icon"></span>
 		  </button>
 		  <a className="navbar-brand" href="#home">
-		  	<img style={{width: 30 , heigth:30 }} src="https://store-images.s-microsoft.com/image/apps.54178.13548944327891380.9678aa3c-94b5-4326-8f29-886220160bf7.d926c117-cc96-450e-bc06-b3609d08dc24?w=180&h=180&q=60" alt="john alexis guerra" className="rounded-circle"/>
+		  	<img style={{width: 30 , heigth:30 }} src="https://raw.githubusercontent.com/sneiderV/img/master/icon.png?token=AT1go0wclVL3_PujQYuMBX-DI3ng6c9iks5bCKTRwA%3D%3D" alt="TweetGrades" className="rounded-circle"/>
 		  	TweetGrades
 		  </a>
 		  <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -254,9 +255,8 @@ render(){
 				<div className="col-6 divHome" >
 				<div className="row">
 					<div className="col">
-						<br/>
-						<img style={{width: 300 , heigth:450 }} src="https://store-images.s-microsoft.com/image/apps.54178.13548944327891380.9678aa3c-94b5-4326-8f29-886220160bf7.d926c117-cc96-450e-bc06-b3609d08dc24?w=180&h=180&q=60" alt="john alexis guerra" className="rounded-circle"/>
-						<h1 className="blueT">TweetGrades</h1>
+						<br/><br/>
+						<img style={{width: 400 , heigth:580 }} src="https://raw.githubusercontent.com/sneiderV/img/master/icon.png?token=AT1go0wclVL3_PujQYuMBX-DI3ng6c9iks5bCKTRwA%3D%3D" alt="TweetGrades" />
 					</div>
 				</div>
 				</div>

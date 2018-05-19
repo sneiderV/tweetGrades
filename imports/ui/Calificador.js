@@ -107,7 +107,7 @@ class Calificador extends Component {
 				    <span className="navbar-toggler-icon"></span>
 				  </button>
 				  <a className="navbar-brand" href="#home">
-				  	<img style={{width: 30 , heigth:30 }} src="https://store-images.s-microsoft.com/image/apps.54178.13548944327891380.9678aa3c-94b5-4326-8f29-886220160bf7.d926c117-cc96-450e-bc06-b3609d08dc24?w=180&h=180&q=60" alt="john alexis guerra" className="rounded-circle"/>
+				  	<img style={{width: 30 , heigth:30 }} src="https://raw.githubusercontent.com/sneiderV/img/master/icon.png?token=AT1go0wclVL3_PujQYuMBX-DI3ng6c9iks5bCKTRwA%3D%3D" alt="tweetgrades" className="rounded-circle"/>
 				  	TweetGrades
 				  </a>
 				  <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -120,26 +120,30 @@ class Calificador extends Component {
 				</nav>
 <div className="container-fluid">
 				<div className="row">
+
+					{/*Aqui va la información*/}
 					<div id="left-bar-calificador" className="col-4 bar-calificador card text-white bg-secondary mb-3"> 
 
 						<div className="card text-white bg-dark mb-3">
 							<div className="card-body">
-								<h4> Section 1 (Tuesday and thursday):</h4>
-								<p>You have <b>{this.tweetsFaltantes(1)}</b> tweets left to grade</p>
+								<h4> <span class="badge badge-light">Section 1</span>  (Tuesday and thursday):</h4>
+								<p>You have <b><span class="badge badge-danger">{this.tweetsFaltantes(1)}</span></b> tweets left to grade</p>
 								<div className="progress" style={{height: 20+"px"}}>
-	  								<div className="progress-bar bg-success" role="progressbar" style={{ width: 100-(5*this.tweetsFaltantes(1))+"%"}} aria-valuenow="0" aria-valuemin="0" aria-valuemax="25"> {100-(5*this.tweetsFaltantes(1))}% </div>
-								</div>
-								<h4> Seccion 2 (Monday and friday):</h4>
-								<p>You have <b>{this.tweetsFaltantes(2)}</b> tweets left to grade</p>
+	  								<div className="progress-bar bg-success" role="progressbar" style={{ width: 100-(5*this.tweetsFaltantes(1))+"%"}} aria-valuenow="0" aria-valuemin="0" aria-valuemax="25"> {100-(5*this.tweetsFaltantes(1))}%</div>
+								</div><br/>
+								<h4> <span class="badge badge-light">Section 2</span> (Monday and friday):</h4>
+								<p>You have <b><span class="badge badge-danger">{this.tweetsFaltantes(2)}</span></b> tweets left to grade</p>
 								<div className="progress" style={{height: 20+"px"}}>
 	  								<div className="progress-bar bg-success" role="progressbar" style={{ width: 100-(5*this.tweetsFaltantes(2))+"%"}} aria-valuenow="0" aria-valuemin="0" aria-valuemax="25"> {100-(5*this.tweetsFaltantes(2))}% </div>
 								</div>
 							</div>
 						</div>
 
-						<div className="card text-white bg-dark mb-3">
-							<div class="card-header"><h4 className="card-title">Grade your students: </h4></div>
-							<img className="card-img-top" src="..." alt="Instructions card"/>
+						<div className="card text-white bg-dark mb-3 ">
+							<div className="card-header"><h4 className="card-title ">Grade your students: </h4></div>
+							<center>
+							<img  style={{width: 250 , heigth:260 }} src="https://raw.githubusercontent.com/sneiderV/img/master/img2.jpg?token=AT1gozR5ITpgJhzu1llEw_KRNzgLzyI8ks5bCJ3BwA%3D%3D" alt="Instructions card"/>
+							</center>
 							<div className="card-body">
 								
 								<div className="alert alert-success">Swipe right <b>(2 points)</b> if the tweet is interesting and original </div>
@@ -153,32 +157,32 @@ class Calificador extends Component {
 					</div>
 	
 					{/*Aqui va lo de hammer*/}
-					<div id="right-bar-calificador" className="col-8 bar-calificador proof card">
+					<div id="right-bar-calificador" className="col-8 bar-calificador proof card ">
 						<center>
-						<div className="container">
-						<h2 className="whiteT"> Grade the latest tweets!</h2> 
-						<div className="row">
-						<div className="card-columns">
-						{this.state.tweets
-							//Solo si tiene seccion valida (eliminar cuentas raras)
-							.filter((t)=>t.seccion>0)
-							//Solo si no he calificado (comparar con idTweet de students)
-							.filter((t)=>!this.yaCalificado(t.id_str))
-							//Le paso los params necesarios a los que quedan
-							.map((t)=>(
-								<div className="grow">
-									<Tweet className="card"
-										key={t.id_str} id_str={t.id_str} profile_image_url={t.user.profile_image_url} 
-										twitteruser={t.user.screen_name} name={t.user.name} 
-										created_at={t.created_at} text={t.text}
-										urls={t.entities.urls} calificarTweet={this.calificarTweet}
-										seccion={t.seccion}
-										/>
+							<div className="container">
+								<h2 className="whiteT contentTA"> Grade the latest tweets!</h2> 
+								<div className="row">
+									<div className="card-columns">
+										{this.state.tweets
+											//Solo si tiene seccion valida (eliminar cuentas raras)
+											.filter((t)=>t.seccion>0)
+											//Solo si no he calificado (comparar con idTweet de students)
+											.filter((t)=>!this.yaCalificado(t.id_str))
+											//Le paso los params necesarios a los que quedan
+											.map((t)=>(
+												<div className="grow">
+													<Tweet className="card"
+														key={t.id_str} id_str={t.id_str} profile_image_url={t.user.profile_image_url} 
+														twitteruser={t.user.screen_name} name={t.user.name} 
+														created_at={t.created_at} text={t.text}
+														urls={t.entities.urls} calificarTweet={this.calificarTweet}
+														seccion={t.seccion}
+														/>
+												</div>
+										))}	
+									</div>
 								</div>
-							))}	
-						</div>
-						</div>
-						</div>
+							</div>
 						</center>
 					</div>
 				</div>

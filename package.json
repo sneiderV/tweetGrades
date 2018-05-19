@@ -16,6 +16,7 @@
     "react-hammerjs": "^1.0.1",
     "react-mounter": "^1.2.0",
     "toastr": "^2.1.4",
+    "sweetalert": "^2.1.0",
     "twit": "1.1.19"
   }
 }
