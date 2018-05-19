@@ -12,6 +12,7 @@ import { Students } from "../api/students.js";
 //Componentes
 import AccountsUI from "./AccountsUI.js";
 import LineChart from "./LineChart.js";
+import swal from 'sweetalert';
 
 class App extends Component{
 	constructor(props){
@@ -135,7 +136,7 @@ class App extends Component{
 		const code = ReactDOM.findDOMNode(this.refs.code).value;
 	    var screenname = this.getScreenName(code);
 		if(!screenname){
-			alert("no hay estudiante con ese codigo");
+			swal("you are not a student of this course!", "or check if your code is correct", "warning");
 			return;
 		}
 		this.setState({ 
