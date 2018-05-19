@@ -209,7 +209,15 @@ verificarUsuario(){
 
 renderMensajeConCodigo(){
 	if(this.state.currentCode>0)
-		return (<h4>Showing grades for {this.state.currentScreenName}, with code {this.state.currentCode}</h4>);
+		return ( <div>
+			<h4>Showing grades for {this.state.currentScreenName}, with code {this.state.currentCode}</h4>
+			<button type="button" className="btn btn-info" data-toggle="tooltip" data-placement="right" 
+				title=" 2 points: An interesting and original comment.
+						1 points: An interesting comment but that was mentioned before by another student.
+						0 points: A non interesting comment">
+				  remember how the points are assigned
+			</button>
+		</div>);
 }
 
 render(){
@@ -218,6 +226,11 @@ render(){
 		this.cargarCalificador();
 		return <div></div>;
 	}
+
+	$(function () {
+  		$('[data-toggle="tooltip"]').tooltip()
+	});
+	
 	return(
 		//div inicial
 		<div className="proof">
@@ -294,6 +307,7 @@ render(){
 				</div>
 				<div className="col"></div>
 			</div> <br/>
+			
 			<div id="dials" className="row">
 				<div className="col"></div>
 				<div className="col-auto">
