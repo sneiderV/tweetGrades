@@ -95,6 +95,22 @@ export default class LineChart extends Component {
 
 		if(this.props.currentCode >0)
 			this.seleccionarCodigo(this.props.currentCode);
+		this.mostrarFechaDeClase();
+	}
+
+	mostrarFechaDeClase(){
+		let fechas = this.fechas;
+		d3.select(".axis--x")
+			.selectAll(".tick > text")
+			// .select("text")
+			// .attr("onmouseover",function(){return "hola palola"})
+			// .text(0);
+				.each(function(d,i){
+					d3.select(this).text(fechas[d]);
+				});
+			// .data(this.fechas)
+			// 	.text(function(d){return });
+		// console.log("hover",hover);
 	}
 
 	seleccionarCodigo(codigo){

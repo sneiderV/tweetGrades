@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Hammer from "react-hammerjs";
 import moment from "moment";
-import * as toastr from "toastr";
 
 export default class Tweet extends Component {
 	constructor(props){
@@ -100,7 +99,7 @@ export default class Tweet extends Component {
 						</div>
 					</div>
 					<p className="card-text">{this.props.text}</p>
-					<h6 className="card-subtitle mb-2 text-muted">{moment(this.props.created_at).toString()}</h6>
+					<p className="card-text"><small className="text-muted">{moment(this.props.created_at).toString()}</small></p>
 					<a href={this.props.urls.map((u)=>{return u.expanded_url})}>
 						see full tweet
 						<img style={{width: 30 , heigth:20 }} src="https://vignette.wikia.nocookie.net/es.starwars/images/9/92/Twitter_Icon.png/revision/latest?cb=20151201204526" alt="profile image" className="rounded-circle"/>

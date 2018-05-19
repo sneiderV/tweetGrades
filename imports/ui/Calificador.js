@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withTracker } from "meteor/react-meteor-data";
 import { Students } from "../api/students.js";
 import * as d3 from "d3";
+import swal from 'sweetalert';
 //components
 import Tweet from "./Tweet.js";
 import AccountsUI from "./AccountsUI.js";
@@ -53,10 +54,11 @@ class Calificador extends Component {
 
 	//A cada tweet se le debe pasar esta funcion, para que haga render
 	calificarTweet(twitteruser, puntos, idTweet, posClase){
-		//Agregar puntaje
-		console.log("calificar Tweet de "+twitteruser+" con "+puntos+" puntos y en clase #"+posClase);
-		//agregar id de tweet
-		console.log("registrar id tweet: "+idTweet);
+		swal({
+				title:"Tweet grade updated",
+				text:twitteruser+" got "+puntos+" points for this attempt",
+				timer:3000
+			});
 		Meteor.call("calificarTweet",twitteruser, puntos, idTweet, posClase);
 	}
 
