@@ -2,6 +2,8 @@
 
 Este es el proyecto final del curso Programación con tecnologías Web de la Universidad de Los Andes. 
 
+
+
 *TweetGrades* permite a los estudiantes de la materia visualizar en tiempo real los resultados de los tweets realizados
 con los tags **"#WebDev @Uniandes"** (mecanismo de control de lectura). El estudiante puede visualizar qué tweets se han publicado
 y qué nota se ha obtenido para cada clase del semestre.
@@ -26,8 +28,12 @@ MongoDB, Meteor, Node y javascript.
 
 ## Despliegue
 
-Si desea interactuar con el estado actual de nuestra aplicación , solo necesita abrir en su navegador favorito la siguiente URL: [Street Test](https://streettestapp.herokuapp.com/) , 
+Si desea interactuar con el estado actual de nuestra aplicación , solo necesita abrir en su navegador favorito la siguiente URL: [Tweet Grades](http://tweetgrades.herokuapp.com/) , 
 pero si usted prefiere descargar el proyecto, debe ejecutar los sieguientes comandos en el directorio donde ubique el proyecto:
+
+**Clone el repositorio**
+
+> git clone https://github.com/sneiderV/tweetGrades.git
 
 **En el directorio raíz del proyecto**
 
