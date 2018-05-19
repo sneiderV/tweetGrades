@@ -77,7 +77,6 @@ class Calificador extends Component {
 		this.props.students.forEach((s)=>{
 			s.idtweets.forEach((id)=>{
 				let comp = id===id_str;
-				console.log("comp", comp);
 				//Ya se califico, pues guardo el id
 				if(id===id_str) calificado = true;
 			})

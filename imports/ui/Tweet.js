@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Hammer from "react-hammerjs";
 import moment from "moment";
+import * as toastr from "toastr";
 
 export default class Tweet extends Component {
 	constructor(props){
@@ -13,7 +14,6 @@ export default class Tweet extends Component {
 		this.leftpoints=0;
 		this.downpoints=1;
 		this.rightpoints=2;
-		
 	}
 
 	//Por aqui se comunica con la clase padre.
@@ -33,6 +33,7 @@ export default class Tweet extends Component {
 			this.props.id_str,
 			this.posicionClase()
 			);
+
 	}
 
 	handleSwipeRight(){
@@ -42,6 +43,7 @@ export default class Tweet extends Component {
 			this.props.id_str,
 			this.posicionClase()
 			);
+
 	}
 
 	//A partir de la fecha me dice a que clase pertenece
@@ -58,7 +60,7 @@ export default class Tweet extends Component {
 		if(mes==="May"){
 			//desde el sabado pueden tweetear
 			if(numDia>11){
-				if(numDia>14 && numDia<=18)	return 25;
+				if(numDia>14 && numDia<=19)	return 25;
 				if(numDia<=14) return 24;
 			}
 			else if(numDia>4){
